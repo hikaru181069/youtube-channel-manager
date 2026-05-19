@@ -11,3 +11,29 @@ export const getChannels = async () => {
 
   return response.json();
 };
+
+export const createChannel = async (channelData) => {
+  const response = await fetch(`${API_BASE_URL}/channels`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(channelData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create channel");
+  }
+
+  return response.json();
+};
+
+export const deleteChannel = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/channels/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete channel");
+  }
+};

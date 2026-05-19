@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import ChannelForm from "../components/ChannelForm";
 import ChannelList from "../components/ChannelList";
-import { getChannels } from "../services/channelApi";
+import { createChannel, getChannels } from "../services/channelApi";
 
 function Home() {
   const [channels, setChannels] = useState([]);
@@ -23,9 +24,15 @@ function Home() {
     fetchChannels();
   }, []); //useEffectこの場合初回実行時のみ作動
 
+  const handleAddChannel = async (channelData) => {
+    const newChannel = await createChannel(channelData);
+    setChannels([...channels, newChannel]);
+  };
+
   return (
     <main>
       <h1>YouTube Channel Manager</h1>
+      <ChannelForm onAddChannel={handleAddChannel} />
       <ChannelList channels={channels} />
     </main>
   );

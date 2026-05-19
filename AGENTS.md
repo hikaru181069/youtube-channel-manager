@@ -233,4 +233,25 @@ Prioritize:
 - maintainability
 - beginner-friendly explanations
 
+---
+
+## Future Planned Technologies
+
+This project may introduce the following technologies in later phases:
+
+- Chrome Extension
+- YouTube OAuth
+- authentication
+- TypeScript
+- Docker
+- Zustand, only if frontend state becomes complex
+
+Do not introduce them in the current MVP phase.
+
+Avoid unless explicitly requested:
+
+- Redux
+- Next.js
+- advanced backend architecture
+
 This project is intended to become a strong internship portfolio project.
