@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import ChannelForm from "../components/ChannelForm";
 import ChannelList from "../components/ChannelList";
-import { createChannel, getChannels } from "../services/channelApi";
+import {
+  createChannel,
+  deleteChannel,
+  getChannels,
+} from "../services/channelApi";
 
 function Home() {
   const [channels, setChannels] = useState([]);
@@ -29,11 +33,17 @@ function Home() {
     setChannels([...channels, newChannel]);
   };
 
+  const handleDeleteChannel = async (id) => {
+    await deleteChannel(id);
+
+    setChannels(channels.filter((channel) => channel._id !== id));
+  };
+
   return (
     <main>
       <h1>YouTube Channel Manager</h1>
       <ChannelForm onAddChannel={handleAddChannel} />
-      <ChannelList channels={channels} />
+      <ChannelList channels={channels} onDeleteChannel={handleDeleteChannel} />
     </main>
   );
 }
