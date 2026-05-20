@@ -9,6 +9,7 @@ import {
 
 function Home() {
   const [channels, setChannels] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   //useEffectを使う理由は、reactは、render中にapi通信してはいけないから。api通信は副作用
   //副作用はuseEffectに分離する。これ基本。
@@ -23,6 +24,7 @@ function Home() {
     const fetchChannels = async () => {
       const data = await getChannels();
       setChannels(data);
+      setIsLoading(false);
     };
 
     fetchChannels();
@@ -43,7 +45,14 @@ function Home() {
     <main>
       <h1>YouTube Channel Manager</h1>
       <ChannelForm onAddChannel={handleAddChannel} />
-      <ChannelList channels={channels} onDeleteChannel={handleDeleteChannel} />
+      {isLoading ? (
+        <p>Loading channels...</p>
+      ) : (
+        <ChannelList
+          channels={channels}
+          onDeleteChannel={handleDeleteChannel}
+        />
+      )}
     </main>
   );
 }
