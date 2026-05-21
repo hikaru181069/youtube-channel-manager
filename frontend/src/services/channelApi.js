@@ -36,4 +36,6 @@ export const deleteChannel = async (id) => {
   if (!response.ok) {
     throw new Error("Failed to delete channel");
   }
+
+  return response.json();
 };
